@@ -1,0 +1,1644 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- skill:chrome -->
+<style>
+/* Credit line — bottom-right */
+.design-ui-credit {
+  position: fixed;
+  bottom: 12px;
+  right: 12px;
+  font: 11px/1 system-ui, sans-serif;
+  color: rgba(128,128,128,0.5);
+  pointer-events: none;
+  z-index: 2147483647;
+  transition: opacity 0.4s ease;
+  user-select: none;
+  letter-spacing: 0.02em;
+}
+
+/* Hide chrome on touch devices */
+@media (hover: none) {
+  .design-ui-credit { display: none; }
+}
+
+/* Print fixes */
+@media print {
+  * {
+    transition: none !important;
+    animation: none !important;
+    box-shadow: none !important;
+  }
+  body {
+    print-color-adjust: exact;
+    -webkit-print-color-adjust: exact;
+  }
+  .design-ui-credit { display: none !important; }
+}
+
+</style>
+<!-- /skill:chrome -->
+<!-- skill:libraries -->
+<script src="https://cdn.jsdelivr.net/npm/lucide@0.383.0/dist/umd/lucide.min.js" integrity="sha384-wHFvAtjmgnkA2PJcMsDaCgdipf7X7YV44X/igbLHpvGiq6T5/PvFKl93grpvtbQT" crossorigin="anonymous"></script>
+<script>document.addEventListener("DOMContentLoaded",()=>lucide.createIcons())</script>
+<!-- /skill:libraries -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Imran Sarwar - Portfolio</title>
+    <link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;600;700;800&family=DM+Sans:ital,wght@0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: oklch(55% 0.18 25);
+            --primary-light: oklch(70% 0.12 25);
+            --primary-lighter: oklch(92% 0.04 25);
+            --primary-dark: oklch(40% 0.15 25);
+
+            --neutral-950: oklch(12% 0.008 25);
+            --neutral-900: oklch(18% 0.008 25);
+            --neutral-800: oklch(25% 0.008 25);
+            --neutral-700: oklch(35% 0.006 25);
+            --neutral-600: oklch(45% 0.006 25);
+            --neutral-500: oklch(55% 0.005 25);
+            --neutral-400: oklch(65% 0.005 25);
+            --neutral-300: oklch(78% 0.004 25);
+            --neutral-200: oklch(88% 0.004 25);
+            --neutral-100: oklch(94% 0.003 25);
+            --neutral-50: oklch(97.5% 0.002 25);
+
+            --surface: oklch(99% 0.002 25);
+
+            --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+            --ease-out-quart: cubic-bezier(0.25, 1, 0.5, 1);
+        }
+
+        html {
+            scroll-behavior: smooth;
+            font-optical-sizing: auto;
+        }
+
+        body {
+            font-family: 'DM Sans', system-ui, sans-serif;
+            background: var(--surface);
+            color: var(--neutral-800);
+            line-height: 1.6;
+            font-size: 1rem;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        h1, h2, h3, h4 {
+            font-family: 'Sora', sans-serif;
+            text-wrap: balance;
+            color: var(--neutral-950);
+        }
+
+        p { text-wrap: pretty; }
+
+        /* NAV */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
+            padding: 16px 32px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: oklch(99% 0.002 25 / 0.85);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--neutral-200);
+        }
+
+        .nav-logo {
+            font-family: 'Sora', sans-serif;
+            font-weight: 700;
+            font-size: 1.125rem;
+            color: var(--neutral-950);
+            letter-spacing: -0.02em;
+        }
+
+        .nav-logo span { color: var(--primary); }
+
+        .nav-links {
+            display: flex;
+            gap: 32px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--neutral-600);
+            font-size: 0.875rem;
+            font-weight: 500;
+            transition: color 0.15s;
+            position: relative;
+        }
+
+        .nav-links a:hover { color: var(--primary); }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--primary);
+            transition: width 0.3s var(--ease-out-expo);
+        }
+
+        .nav-links a:hover::after { width: 100%; }
+
+        .nav-toggle {
+            display: none;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 8px;
+        }
+
+        .nav-toggle span {
+            display: block;
+            width: 24px;
+            height: 2px;
+            background: var(--neutral-800);
+            margin: 6px 0;
+            transition: all 0.3s var(--ease-out-expo);
+        }
+
+        /* HERO */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            padding: 120px 32px 80px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -20%;
+            right: -10%;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, oklch(90% 0.08 25 / 0.4), transparent 70%);
+            pointer-events: none;
+        }
+
+        .hero-inner {
+            max-width: 900px;
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        .hero-eyebrow {
+            font-size: 0.875rem;
+            font-weight: 500;
+            color: var(--primary);
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            margin-bottom: 16px;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeUp 0.8s var(--ease-out-expo) 0.2s forwards;
+        }
+
+        .hero h1 {
+            font-size: clamp(2.5rem, 7vw, 4.5rem);
+            font-weight: 800;
+            line-height: 1.05;
+            letter-spacing: -0.03em;
+            margin-bottom: 24px;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeUp 0.8s var(--ease-out-expo) 0.35s forwards;
+        }
+
+        .hero h1 .highlight { color: var(--primary); }
+
+        .hero-description {
+            font-size: 1.125rem;
+            line-height: 1.7;
+            color: var(--neutral-600);
+            max-width: 65ch;
+            margin-bottom: 40px;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeUp 0.8s var(--ease-out-expo) 0.5s forwards;
+        }
+
+        .hero-cta {
+            display: flex;
+            gap: 16px;
+            flex-wrap: wrap;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeUp 0.8s var(--ease-out-expo) 0.65s forwards;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 14px 28px;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.2s var(--ease-out-quart);
+            cursor: pointer;
+            border: none;
+            font-family: 'DM Sans', sans-serif;
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            color: oklch(98% 0.005 25);
+        }
+
+        .btn-primary:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--neutral-800);
+            border: 1.5px solid var(--neutral-300);
+        }
+
+        .btn-secondary:hover {
+            border-color: var(--primary);
+            color: var(--primary);
+            transform: translateY(-2px);
+        }
+
+        /* SECTIONS */
+        section {
+            padding: 96px 32px;
+        }
+
+        .section-inner {
+            max-width: 960px;
+            margin: 0 auto;
+        }
+
+        .section-label {
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: var(--primary);
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            margin-bottom: 12px;
+        }
+
+        .section-title {
+            font-size: clamp(1.75rem, 4vw, 2.5rem);
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            margin-bottom: 16px;
+        }
+
+        .section-subtitle {
+            font-size: 1.05rem;
+            color: var(--neutral-500);
+            max-width: 55ch;
+            margin-bottom: 56px;
+            line-height: 1.6;
+        }
+
+        /* EXPERIENCE */
+        .experience-section {
+            background: var(--neutral-50);
+        }
+
+        .exp-grid {
+            display: grid;
+            gap: 0;
+        }
+
+        .exp-card {
+            display: grid;
+            grid-template-columns: 180px 1fr;
+            gap: 32px;
+            padding: 40px 0;
+            border-bottom: 1px solid var(--neutral-200);
+            transition: all 0.3s var(--ease-out-expo);
+        }
+
+        .exp-card:first-child { padding-top: 0; }
+        .exp-card:last-child { border-bottom: none; padding-bottom: 0; }
+        .exp-card:hover { transform: translateX(4px); }
+
+        .exp-meta { position: relative; }
+
+        .exp-date {
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: var(--neutral-500);
+            letter-spacing: 0.02em;
+            font-feature-settings: 'tnum';
+            margin-bottom: 8px;
+        }
+
+        .exp-company {
+            font-family: 'Sora', sans-serif;
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--primary);
+        }
+
+        .exp-type {
+            display: inline-block;
+            margin-top: 10px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+            padding: 4px 10px;
+            border-radius: 4px;
+            background: var(--primary-lighter);
+            color: var(--primary-dark);
+        }
+
+        .exp-content h3 {
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin-bottom: 12px;
+            color: var(--neutral-950);
+        }
+
+        .exp-desc {
+            font-size: 0.925rem;
+            color: var(--neutral-600);
+            line-height: 1.7;
+            margin-bottom: 16px;
+            max-width: 60ch;
+        }
+
+        .exp-highlights {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .exp-tag {
+            font-size: 0.75rem;
+            font-weight: 500;
+            padding: 5px 12px;
+            border-radius: 100px;
+            background: var(--surface);
+            color: var(--neutral-700);
+            border: 1px solid var(--neutral-200);
+            transition: all 0.2s;
+        }
+
+        .exp-card:hover .exp-tag {
+            border-color: var(--primary-light);
+            color: var(--primary-dark);
+        }
+
+        .year-marker { padding: 24px 0 16px; }
+
+        .year-marker span {
+            font-family: 'Sora', sans-serif;
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: var(--neutral-200);
+            letter-spacing: -0.03em;
+        }
+
+        .stats-row {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+            gap: 24px;
+            margin-bottom: 56px;
+            padding: 32px;
+            background: var(--surface);
+            border-radius: 16px;
+            border: 1px solid var(--neutral-200);
+        }
+
+        .stat-item { text-align: center; }
+
+        .stat-number {
+            font-family: 'Sora', sans-serif;
+            font-size: 2rem;
+            font-weight: 800;
+            color: var(--primary);
+            line-height: 1;
+            margin-bottom: 6px;
+            font-feature-settings: 'tnum';
+        }
+
+        .stat-label {
+            font-size: 0.8rem;
+            color: var(--neutral-500);
+            font-weight: 500;
+        }
+
+        /* SKILLS */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 24px;
+        }
+
+        .skill-item {
+            padding: 24px;
+            background: var(--neutral-50);
+            border-radius: 12px;
+            border: 1px solid var(--neutral-200);
+            transition: all 0.3s var(--ease-out-expo);
+        }
+
+        .skill-item:hover {
+            border-color: var(--primary-light);
+            transform: translateY(-4px);
+            box-shadow: 0 12px 40px oklch(55% 0.18 25 / 0.08);
+        }
+
+        .skill-number {
+            font-family: 'Sora', sans-serif;
+            font-size: 0.75rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 8px;
+            letter-spacing: 0.05em;
+        }
+
+        .skill-name {
+            font-family: 'Sora', sans-serif;
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--neutral-900);
+            margin-bottom: 6px;
+        }
+
+        .skill-desc {
+            font-size: 0.85rem;
+            color: var(--neutral-500);
+            line-height: 1.5;
+        }
+
+        /* EDUCATION */
+        .education-section {
+            background: var(--neutral-950);
+            color: oklch(85% 0.005 25);
+        }
+
+        .education-section .section-label { color: var(--primary-light); }
+        .education-section .section-title { color: oklch(96% 0.005 25); }
+        .education-section .section-subtitle { color: oklch(60% 0.005 25); }
+
+        .edu-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 24px;
+            margin-bottom: 64px;
+        }
+
+        .edu-card {
+            padding: 32px;
+            background: oklch(16% 0.01 25);
+            border-radius: 16px;
+            border: 1px solid oklch(22% 0.008 25);
+            transition: all 0.3s var(--ease-out-expo);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .edu-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--primary), var(--primary-light));
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .edu-card:hover::before { opacity: 1; }
+
+        .edu-card:hover {
+            border-color: oklch(30% 0.02 25);
+            transform: translateY(-4px);
+        }
+
+        .edu-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 12px;
+            background: oklch(22% 0.015 25);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+
+        .edu-icon i { color: var(--primary-light); }
+
+        .edu-level {
+            font-size: 0.7rem;
+            font-weight: 600;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--primary-light);
+            margin-bottom: 8px;
+        }
+
+        .edu-degree {
+            font-family: 'Sora', sans-serif;
+            font-size: 1.15rem;
+            font-weight: 700;
+            color: oklch(94% 0.005 25);
+            margin-bottom: 8px;
+            line-height: 1.3;
+        }
+
+        .edu-school {
+            font-size: 0.9rem;
+            color: oklch(60% 0.005 25);
+            margin-bottom: 12px;
+        }
+
+        .edu-major-tag {
+            display: inline-block;
+            font-size: 0.75rem;
+            font-weight: 500;
+            padding: 5px 12px;
+            border-radius: 100px;
+            background: oklch(22% 0.02 25);
+            color: var(--primary-light);
+            border: 1px solid oklch(28% 0.02 25);
+        }
+
+        .cert-header { margin-bottom: 24px; }
+
+        .cert-header h3 {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: oklch(94% 0.005 25);
+        }
+
+        .cert-grid { display: grid; gap: 16px; }
+
+        .cert-item {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            padding: 20px 24px;
+            background: oklch(16% 0.01 25);
+            border-radius: 12px;
+            border: 1px solid oklch(22% 0.008 25);
+            transition: all 0.25s var(--ease-out-expo);
+        }
+
+        .cert-item:hover {
+            border-color: oklch(30% 0.02 25);
+            transform: translateX(4px);
+        }
+
+        .cert-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+            background: oklch(22% 0.015 25);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .cert-icon i { color: var(--primary-light); }
+        .cert-info { flex: 1; }
+
+        .cert-name {
+            font-weight: 600;
+            font-size: 0.925rem;
+            color: oklch(90% 0.005 25);
+        }
+
+        .cert-org {
+            font-size: 0.8rem;
+            color: oklch(55% 0.005 25);
+            margin-top: 2px;
+        }
+
+        .cert-year {
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: oklch(50% 0.005 25);
+            font-feature-settings: 'tnum';
+            padding: 4px 10px;
+            background: oklch(20% 0.008 25);
+            border-radius: 4px;
+        }
+
+        /* CONTACT — ENHANCED */
+        .contact-section {
+            padding: 120px 32px;
+            position: relative;
+            overflow: hidden;
+            background: var(--surface);
+        }
+
+        .contact-section::before {
+            content: '';
+            position: absolute;
+            bottom: -20%;
+            left: -10%;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, oklch(90% 0.08 25 / 0.3), transparent 70%);
+            pointer-events: none;
+        }
+
+        .contact-section::after {
+            content: '';
+            position: absolute;
+            top: -10%;
+            right: -5%;
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, oklch(92% 0.06 25 / 0.2), transparent 70%);
+            pointer-events: none;
+        }
+
+        .contact-inner {
+            max-width: 960px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .contact-headline {
+            text-align: center;
+            margin-bottom: 64px;
+        }
+
+        .contact-headline .section-label {
+            margin-bottom: 16px;
+        }
+
+        .contact-headline h2 {
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            font-weight: 800;
+            letter-spacing: -0.03em;
+            margin-bottom: 16px;
+            color: var(--neutral-950);
+        }
+
+        .contact-headline p {
+            font-size: 1.1rem;
+            color: var(--neutral-500);
+            max-width: 50ch;
+            margin: 0 auto;
+            line-height: 1.7;
+        }
+
+        .contact-cards {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 24px;
+            margin-bottom: 48px;
+        }
+
+        .contact-card {
+            padding: 36px;
+            background: var(--neutral-50);
+            border-radius: 16px;
+            border: 1px solid var(--neutral-200);
+            transition: all 0.3s var(--ease-out-expo);
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 20px;
+            text-decoration: none;
+            color: inherit;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .contact-card::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: var(--primary);
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.4s var(--ease-out-expo);
+        }
+
+        .contact-card:hover::after {
+            transform: scaleX(1);
+        }
+
+        .contact-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 20px 60px oklch(55% 0.18 25 / 0.08);
+            border-color: var(--primary-light);
+        }
+
+        .contact-card-icon {
+            width: 56px;
+            height: 56px;
+            border-radius: 14px;
+            background: var(--primary-lighter);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s var(--ease-out-expo);
+        }
+
+        .contact-card:hover .contact-card-icon {
+            background: var(--primary);
+        }
+
+        .contact-card-icon i {
+            color: var(--primary);
+            transition: color 0.3s;
+        }
+
+        .contact-card:hover .contact-card-icon i {
+            color: oklch(98% 0.005 25);
+        }
+
+        .contact-card-label {
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--neutral-400);
+        }
+
+        .contact-card-value {
+            font-family: 'Sora', sans-serif;
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--neutral-950);
+            transition: color 0.2s;
+        }
+
+        .contact-card:hover .contact-card-value {
+            color: var(--primary);
+        }
+
+        .contact-card-hint {
+            font-size: 0.85rem;
+            color: var(--neutral-500);
+            margin-top: -8px;
+        }
+
+        /* AVAILABILITY BANNER */
+        .availability-banner {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            padding: 20px 32px;
+            background: var(--primary-lighter);
+            border-radius: 12px;
+            border: 1px solid oklch(85% 0.06 25);
+        }
+
+        .availability-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: oklch(55% 0.2 145);
+            position: relative;
+        }
+
+        .availability-dot::after {
+            content: '';
+            position: absolute;
+            inset: -3px;
+            border-radius: 50%;
+            background: oklch(55% 0.2 145 / 0.3);
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.6); opacity: 0; }
+        }
+
+        .availability-text {
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--neutral-800);
+        }
+
+        .availability-roles {
+            font-size: 0.85rem;
+            color: var(--neutral-600);
+            margin-left: 4px;
+        }
+
+        /* FOOTER — ENHANCED */
+        footer {
+            background: var(--neutral-950);
+            padding: 64px 32px 32px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, oklch(30% 0.03 25), transparent);
+        }
+
+        .footer-inner {
+            max-width: 960px;
+            margin: 0 auto;
+        }
+
+        .footer-top {
+            display: grid;
+            grid-template-columns: 1.5fr 1fr 1fr;
+            gap: 48px;
+            padding-bottom: 48px;
+            border-bottom: 1px solid oklch(20% 0.008 25);
+        }
+
+        .footer-brand {
+            max-width: 300px;
+        }
+
+        .footer-brand-name {
+            font-family: 'Sora', sans-serif;
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: oklch(94% 0.005 25);
+            margin-bottom: 12px;
+        }
+
+        .footer-brand-name span {
+            color: var(--primary-light);
+        }
+
+        .footer-brand-desc {
+            font-size: 0.875rem;
+            color: oklch(55% 0.005 25);
+            line-height: 1.7;
+        }
+
+        .footer-col-title {
+            font-family: 'Sora', sans-serif;
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: oklch(50% 0.005 25);
+            margin-bottom: 16px;
+        }
+
+        .footer-links {
+            list-style: none;
+            display: grid;
+            gap: 10px;
+        }
+
+        .footer-links a {
+            text-decoration: none;
+            color: oklch(70% 0.005 25);
+            font-size: 0.875rem;
+            transition: color 0.15s, transform 0.15s;
+            display: inline-block;
+        }
+
+        .footer-links a:hover {
+            color: var(--primary-light);
+            transform: translateX(4px);
+        }
+
+        .footer-contact-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 12px;
+        }
+
+        .footer-contact-item i {
+            color: var(--primary-light);
+            flex-shrink: 0;
+        }
+
+        .footer-contact-item a,
+        .footer-contact-item span {
+            font-size: 0.875rem;
+            color: oklch(70% 0.005 25);
+            text-decoration: none;
+            transition: color 0.15s;
+        }
+
+        .footer-contact-item a:hover {
+            color: var(--primary-light);
+        }
+
+        .footer-bottom {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding-top: 24px;
+            flex-wrap: wrap;
+            gap: 16px;
+        }
+
+        .footer-copyright {
+            font-size: 0.8rem;
+            color: oklch(45% 0.005 25);
+        }
+
+        .footer-made-with {
+            font-size: 0.8rem;
+            color: oklch(45% 0.005 25);
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .footer-made-with .heart {
+            color: var(--primary);
+            font-size: 1rem;
+            animation: heartbeat 1.5s infinite;
+        }
+
+        @keyframes heartbeat {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.15); }
+        }
+
+        .footer-scroll-top {
+            position: fixed;
+            bottom: 24px;
+            right: 24px;
+            width: 44px;
+            height: 44px;
+            border-radius: 12px;
+            background: var(--primary);
+            color: oklch(98% 0.005 25);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            opacity: 0;
+            transform: translateY(16px);
+            transition: all 0.3s var(--ease-out-expo);
+            z-index: 50;
+            border: none;
+            cursor: pointer;
+        }
+
+        .footer-scroll-top.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .footer-scroll-top:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+        }
+
+        /* ANIMATIONS */
+        @keyframes fadeUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .fade-in {
+            opacity: 0;
+            transform: translateY(24px);
+            transition: opacity 0.6s var(--ease-out-expo), transform 0.6s var(--ease-out-expo);
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 768px) {
+            nav { padding: 14px 20px; }
+
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background: var(--surface);
+                flex-direction: column;
+                padding: 24px;
+                gap: 20px;
+                border-bottom: 1px solid var(--neutral-200);
+            }
+
+            .nav-links.open { display: flex; }
+            .nav-toggle { display: block; }
+
+            .hero {
+                padding: 100px 20px 60px;
+                min-height: auto;
+            }
+
+            section { padding: 64px 20px; }
+
+            .exp-card {
+                grid-template-columns: 1fr;
+                gap: 8px;
+            }
+
+            .exp-meta {
+                display: flex;
+                align-items: center;
+                gap: 12px;
+                flex-wrap: wrap;
+            }
+
+            .exp-type { margin-top: 0; }
+            .edu-grid { grid-template-columns: 1fr; }
+            .skills-grid { grid-template-columns: 1fr; }
+
+            .hero-cta { flex-direction: column; }
+            .btn { justify-content: center; }
+
+            .stats-row {
+                grid-template-columns: repeat(2, 1fr);
+                padding: 24px;
+            }
+
+            .year-marker span { font-size: 1.75rem; }
+
+            .contact-cards {
+                grid-template-columns: 1fr;
+            }
+
+            .contact-section { padding: 80px 20px; }
+
+            .availability-banner {
+                flex-direction: column;
+                text-align: center;
+                gap: 8px;
+            }
+
+            .availability-roles {
+                margin-left: 0;
+                display: block;
+            }
+
+            .footer-top {
+                grid-template-columns: 1fr;
+                gap: 32px;
+            }
+
+            .footer-brand {
+                max-width: 100%;
+            }
+
+            .footer-bottom {
+                flex-direction: column;
+                text-align: center;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero h1 { font-size: 2rem; }
+            .section-title { font-size: 1.5rem; }
+            .stats-row { grid-template-columns: 1fr; }
+            .contact-headline h2 { font-size: 1.75rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <div class="nav-logo">Imran<span>.</span></div>
+        <ul class="nav-links" id="navLinks">
+            <li><a href="#about">About</a></li>
+            <li><a href="#experience">Experience</a></li>
+            <li><a href="#skills">Skills</a></li>
+            <li><a href="#education">Education</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+        <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+    </nav>
+
+    <!-- HERO -->
+    <section class="hero" id="about">
+        <div class="hero-inner">
+            <p class="hero-eyebrow">Customer Service · Web Development · Operations</p>
+            <h1>I'm <span class="highlight">Imran Sarwar</span>, a versatile professional who delivers results.</h1>
+            <p class="hero-description">
+                Dynamic professional with hands-on experience spanning customer service, medical billing, web development, sales, and operations management. I thrive at the intersection of technology and people, turning complex challenges into smooth workflows.
+            </p>
+            <div class="hero-cta">
+                <a href="#contact" class="btn btn-primary">
+                    <i data-lucide="mail" width="18" height="18"></i>
+                    Get In Touch
+                </a>
+                <a href="#experience" class="btn btn-secondary">
+                    <i data-lucide="briefcase" width="18" height="18"></i>
+                    View Experience
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- EXPERIENCE -->
+    <section class="experience-section" id="experience">
+        <div class="section-inner fade-in">
+            <p class="section-label">Career Journey</p>
+            <h2 class="section-title">Professional Experience</h2>
+            <p class="section-subtitle">Over 9 years of diverse industry experience, from frontline sales to web development and operations management.</p>
+
+            <div class="stats-row">
+                <div class="stat-item">
+                    <p class="stat-number">9+</p>
+                    <p class="stat-label">Years Experience</p>
+                </div>
+                <div class="stat-item">
+                    <p class="stat-number">9</p>
+                    <p class="stat-label">Companies</p>
+                </div>
+                <div class="stat-item">
+                    <p class="stat-number">5+</p>
+                    <p class="stat-label">Industries</p>
+                </div>
+                <div class="stat-item">
+                    <p class="stat-number">3</p>
+                    <p class="stat-label">Certifications</p>
+                </div>
+            </div>
+
+            <div class="exp-grid">
+                <div class="year-marker"><span>2024</span></div>
+
+                <div class="exp-card">
+                    <div class="exp-meta">
+                        <p class="exp-date">2024 – Present</p>
+                        <p class="exp-company">Zambeel</p>
+                        <span class="exp-type">Customer Support</span>
+                    </div>
+                    <div class="exp-content">
+                        <h3>Care Associate</h3>
+                        <p class="exp-desc">Providing multi-channel customer support through calls, chats, and emails. Creating support tickets and coordinating with complaint resolution teams to ensure timely delivery-related issue resolution. Managing customer records through CRM systems while maintaining high service quality standards.</p>
+                        <div class="exp-highlights">
+                            <span class="exp-tag">CRM Systems</span>
+                            <span class="exp-tag">Ticket Management</span>
+                            <span class="exp-tag">Multi-channel Support</span>
+                            <span class="exp-tag">Complaint Resolution</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="exp-card">
+                    <div class="exp-meta">
+                        <p class="exp-date">2024</p>
+                        <p class="exp-company">BIZ Outsource</p>
+                        <span class="exp-type">Customer Service</span>
+                    </div>
+                    <div class="exp-content">
+                        <h3>Customer Service Representative</h3>
+                        <p class="exp-desc">Supported limousine and transportation service customers with vehicle bookings, scheduling requests, and service inquiries. Maintained accurate booking information and resolved customer concerns efficiently across phone, chat, and email communication channels.</p>
+                        <div class="exp-highlights">
+                            <span class="exp-tag">Booking Management</span>
+                            <span class="exp-tag">Scheduling</span>
+                            <span class="exp-tag">Transportation Services</span>
+                            <span class="exp-tag">Email Support</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="year-marker"><span>2023</span></div>
+
+                <div class="exp-card">
+                    <div class="exp-meta">
+                        <p class="exp-date">2023</p>
+                        <p class="exp-company">Global Publications</p>
+                        <span class="exp-type">Management</span>
+                    </div>
+                    <div class="exp-content">
+                        <h3>Manager</h3>
+                        <p class="exp-desc">Managed government tender operations for schools, colleges, and universities. Prepared quotations, approval lists, and required documentation. Coordinated with international publishers for book procurement and supervised team activities to ensure timely arrangement and delivery.</p>
+                        <div class="exp-highlights">
+                            <span class="exp-tag">Tender Management</span>
+                            <span class="exp-tag">Team Supervision</span>
+                            <span class="exp-tag">International Coordination</span>
+                            <span class="exp-tag">Documentation</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="exp-card">
+                    <div class="exp-meta">
+                        <p class="exp-date">2023</p>
+                        <p class="exp-company">Alpha Tech</p>
+                        <span class="exp-type">Sales</span>
+                    </div>
+                    <div class="exp-content">
+                        <h3>Sales Representative</h3>
+                        <p class="exp-desc">Promoted UK mobile SIM packages and smartphone offers while assisting customers with available plans and installment options. Verified customer information for accurate order processing in a target-oriented sales environment.</p>
+                        <div class="exp-highlights">
+                            <span class="exp-tag">Telecom Sales</span>
+                            <span class="exp-tag">Target-Oriented</span>
+                            <span class="exp-tag">Order Processing</span>
+                            <span class="exp-tag">Customer Verification</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="exp-card">
+                    <div class="exp-meta">
+                        <p class="exp-date">2023</p>
+                        <p class="exp-company">Physician Cure</p>
+                        <span class="exp-type">Healthcare</span>
+                    </div>
+                    <div class="exp-content">
+                        <h3>Billing Executive</h3>
+                        <p class="exp-desc">Performed insurance eligibility verification, Accounts Receivable follow-up, payment posting, and denial management for healthcare providers. Worked on multiple insurance portals to resolve claim-related issues and improve reimbursement outcomes while supporting daily revenue cycle operations.</p>
+                        <div class="exp-highlights">
+                            <span class="exp-tag">Insurance Verification</span>
+                            <span class="exp-tag">AR Follow-up</span>
+                            <span class="exp-tag">Denial Management</span>
+                            <span class="exp-tag">Revenue Cycle</span>
+                            <span class="exp-tag">Payment Posting</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="year-marker"><span>2019</span></div>
+
+                <div class="exp-card">
+                    <div class="exp-meta">
+                        <p class="exp-date">2019 – 2022</p>
+                        <p class="exp-company">Tech-House</p>
+                        <span class="exp-type">Development</span>
+                    </div>
+                    <div class="exp-content">
+                        <h3>Web Developer & Designer</h3>
+                        <p class="exp-desc">Developed responsive websites using HTML, CSS, Bootstrap, Tailwind CSS, and WordPress. Implemented modern, user-friendly website designs with practical experience in React.js and PHP for functionality and customization. Delivered complete frontend development projects across multiple clients.</p>
+                        <div class="exp-highlights">
+                            <span class="exp-tag">HTML/CSS</span>
+                            <span class="exp-tag">React.js</span>
+                            <span class="exp-tag">WordPress</span>
+                            <span class="exp-tag">Tailwind CSS</span>
+                            <span class="exp-tag">Bootstrap</span>
+                            <span class="exp-tag">PHP</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="year-marker"><span>2018</span></div>
+
+                <div class="exp-card">
+                    <div class="exp-meta">
+                        <p class="exp-date">2018 – 2019</p>
+                        <p class="exp-company">Allied Book Company</p>
+                        <span class="exp-type">Operations</span>
+                    </div>
+                    <div class="exp-content">
+                        <h3>Wholesale Department Incharge</h3>
+                        <p class="exp-desc">Managed wholesale book operations and supported government tender projects through approval list preparation and documentation management. Generated invoices for wholesale customers and retailers while coordinating with internal teams for smooth business operations.</p>
+                        <div class="exp-highlights">
+                            <span class="exp-tag">Wholesale Ops</span>
+                            <span class="exp-tag">Invoice Management</span>
+                            <span class="exp-tag">Government Tenders</span>
+                            <span class="exp-tag">Inventory</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="year-marker"><span>2017</span></div>
+
+                <div class="exp-card">
+                    <div class="exp-meta">
+                        <p class="exp-date">2017 – 2018</p>
+                        <p class="exp-company">Master Trader Company</p>
+                        <span class="exp-type">Sales</span>
+                    </div>
+                    <div class="exp-content">
+                        <h3>Order Booker & Supplier</h3>
+                        <p class="exp-desc">Visited stationery retailers to generate sales orders and build long-term customer relationships. Managed product deliveries and ensured timely supply of stationery items. Developed strong sales and communication skills through direct market interaction.</p>
+                        <div class="exp-highlights">
+                            <span class="exp-tag">Field Sales</span>
+                            <span class="exp-tag">Supply Chain</span>
+                            <span class="exp-tag">Relationship Building</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="year-marker"><span>2016</span></div>
+
+                <div class="exp-card">
+                    <div class="exp-meta">
+                        <p class="exp-date">2016 – 2017</p>
+                        <p class="exp-company">Mercury Company</p>
+                        <span class="exp-type">Sales</span>
+                    </div>
+                    <div class="exp-content">
+                        <h3>Order Booker</h3>
+                        <p class="exp-desc">Promoted stationery products by visiting retail stores and securing customer orders. Assisted in product supply activities while maintaining regular market coverage and customer engagement. Contributed to sales growth through effective product promotion.</p>
+                        <div class="exp-highlights">
+                            <span class="exp-tag">Product Promotion</span>
+                            <span class="exp-tag">Market Coverage</span>
+                            <span class="exp-tag">Customer Engagement</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SKILLS -->
+    <section id="skills">
+        <div class="section-inner fade-in">
+            <p class="section-label">Expertise</p>
+            <h2 class="section-title">Technical Skills</h2>
+            <p class="section-subtitle">A versatile skill set built across customer-facing roles, technical projects, and operational leadership.</p>
+
+            <div class="skills-grid">
+                <div class="skill-item">
+                    <p class="skill-number">01</p>
+                    <p class="skill-name">Communication</p>
+                    <p class="skill-desc">Clear, professional interactions across voice and digital platforms</p>
+                </div>
+                <div class="skill-item">
+                    <p class="skill-number">02</p>
+                    <p class="skill-name">Customer Service</p>
+                    <p class="skill-desc">Issue resolution, complaint handling, and customer satisfaction</p>
+                </div>
+                <div class="skill-item">
+                    <p class="skill-number">03</p>
+                    <p class="skill-name">Medical Billing</p>
+                    <p class="skill-desc">Eligibility verification, AR follow-up, payment posting, denial management</p>
+                </div>
+                <div class="skill-item">
+                    <p class="skill-number">04</p>
+                    <p class="skill-name">CRM Management</p>
+                    <p class="skill-desc">Customer records, support tickets, and issue resolution systems</p>
+                </div>
+                <div class="skill-item">
+                    <p class="skill-number">05</p>
+                    <p class="skill-name">Web Development</p>
+                    <p class="skill-desc">HTML, CSS, WordPress, Bootstrap, Tailwind CSS, React.js, PHP</p>
+                </div>
+                <div class="skill-item">
+                    <p class="skill-number">06</p>
+                    <p class="skill-name">UI/UX Design</p>
+                    <p class="skill-desc">User-friendly layouts and interfaces using Figma and modern principles</p>
+                </div>
+                <div class="skill-item">
+                    <p class="skill-number">07</p>
+                    <p class="skill-name">Team Coordination</p>
+                    <p class="skill-desc">Supervising teams, monitoring workflows, ensuring smooth operations</p>
+                </div>
+                <div class="skill-item">
+                    <p class="skill-number">08</p>
+                    <p class="skill-name">Sales & Relations</p>
+                    <p class="skill-desc">Generating sales, building customer relationships, maintaining satisfaction</p>
+                </div>
+                <div class="skill-item">
+                    <p class="skill-number">09</p>
+                    <p class="skill-name">Multitasking</p>
+                    <p class="skill-desc">Managing multiple tasks efficiently while maintaining productivity</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- EDUCATION -->
+    <section class="education-section" id="education">
+        <div class="section-inner fade-in">
+            <p class="section-label">Education</p>
+            <h2 class="section-title">Academic Background</h2>
+            <p class="section-subtitle">A solid academic foundation in Computer Science, complemented by professional certifications and continuous learning.</p>
+
+            <div class="edu-grid">
+                <div class="edu-card">
+                    <div class="edu-icon">
+                        <i data-lucide="graduation-cap" width="24" height="24"></i>
+                    </div>
+                    <p class="edu-level">Bachelor's Degree</p>
+                    <p class="edu-degree">BS Computer Science</p>
+                    <p class="edu-school">Virtual University</p>
+                    <span class="edu-major-tag">Major: Computer Science</span>
+                </div>
+
+                <div class="edu-card">
+                    <div class="edu-icon">
+                        <i data-lucide="book-open" width="24" height="24"></i>
+                    </div>
+                    <p class="edu-level">Intermediate</p>
+                    <p class="edu-degree">ICS (Computer Science)</p>
+                    <p class="edu-school">Central Group of Colleges</p>
+                    <span class="edu-major-tag">Computer Science</span>
+                </div>
+
+                <div class="edu-card">
+                    <div class="edu-icon">
+                        <i data-lucide="award" width="24" height="24"></i>
+                    </div>
+                    <p class="edu-level">Matriculation</p>
+                    <p class="edu-degree">SSC (Science Group)</p>
+                    <p class="edu-school">Central Model High School</p>
+                    <span class="edu-major-tag">Biology</span>
+                </div>
+            </div>
+
+            <div class="cert-header">
+                <h3>Professional Certifications</h3>
+            </div>
+
+            <div class="cert-grid">
+                <div class="cert-item">
+                    <div class="cert-icon">
+                        <i data-lucide="file-spreadsheet" width="18" height="18"></i>
+                    </div>
+                    <div class="cert-info">
+                        <p class="cert-name">MS Office Course</p>
+                        <p class="cert-org">Edge College & Institute</p>
+                    </div>
+                    <span class="cert-year">2013</span>
+                </div>
+                <div class="cert-item">
+                    <div class="cert-icon">
+                        <i data-lucide="code-2" width="18" height="18"></i>
+                    </div>
+                    <div class="cert-info">
+                        <p class="cert-name">Web Development</p>
+                        <p class="cert-org">Punjab Computer College</p>
+                    </div>
+                    <span class="cert-year">2017</span>
+                </div>
+                <div class="cert-item">
+                    <div class="cert-icon">
+                        <i data-lucide="pen-tool" width="18" height="18"></i>
+                    </div>
+                    <div class="cert-info">
+                        <p class="cert-name">Shorthand Course</p>
+                        <p class="cert-org">Future Star</p>
+                    </div>
+                    <span class="cert-year">2018</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CONTACT — ENHANCED -->
+    <section class="contact-section" id="contact">
+        <div class="contact-inner fade-in">
+            <div class="contact-headline">
+                <p class="section-label">Get In Touch</p>
+                <h2>Let's Work Together</h2>
+                <p>Ready to bring dedication, versatility, and a results-driven mindset to your team. Let's connect and explore opportunities.</p>
+            </div>
+
+            <div class="contact-cards">
+                <a href="tel:+923114552227" class="contact-card">
+                    <div class="contact-card-icon">
+                        <i data-lucide="phone" width="24" height="24"></i>
+                    </div>
+                    <span class="contact-card-label">Call Me</span>
+                    <span class="contact-card-value">+92 311 4552227</span>
+                    <span class="contact-card-hint">Available for calls during business hours</span>
+                </a>
+
+                <a href="mailto:emraansarvar.company@gmail.com" class="contact-card">
+                    <div class="contact-card-icon">
+                        <i data-lucide="mail" width="24" height="24"></i>
+                    </div>
+                    <span class="contact-card-label">Email Me</span>
+                    <span class="contact-card-value">emraansarvar.company@gmail.com</span>
+                    <span class="contact-card-hint">I typically respond within 24 hours</span>
+                </a>
+            </div>
+
+            <div class="availability-banner">
+                <span class="availability-dot"></span>
+                <span class="availability-text">Currently Available</span>
+                <span class="availability-roles">for Customer Service, Web Development, Medical Billing & Operations roles</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER — ENHANCED -->
+    <footer>
+        <div class="footer-inner">
+            <div class="footer-top">
+                <div class="footer-brand">
+                    <p class="footer-brand-name">Imran Sarwar<span>.</span></p>
+                    <p class="footer-brand-desc">Multi-domain professional with 9+ years of experience in customer service, web development, medical billing, sales, and operations management.</p>
+                </div>
+
+                <div>
+                    <p class="footer-col-title">Quick Links</p>
+                    <ul class="footer-links">
+                        <li><a href="#about">About</a></li>
+                        <li><a href="#experience">Experience</a></li>
+                        <li><a href="#skills">Skills</a></li>
+                        <li><a href="#education">Education</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <p class="footer-col-title">Contact Info</p>
+                    <div class="footer-contact-item">
+                        <i data-lucide="phone" width="16" height="16"></i>
+                        <a href="tel:+923114552227">+92 311 4552227</a>
+                    </div>
+                    <div class="footer-contact-item">
+                        <i data-lucide="mail" width="16" height="16"></i>
+                        <a href="mailto:emraansarvar.company@gmail.com">emraansarvar.company@gmail.com</a>
+                    </div>
+                    <div class="footer-contact-item">
+                        <i data-lucide="map-pin" width="16" height="16"></i>
+                        <span>Pakistan</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <span class="footer-copyright">&copy; 2026 Imran Sarwar. All rights reserved.</span>
+                <span class="footer-made-with">Made with <span class="heart">&#9829;</span> in Pakistan</span>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scroll to top button -->
+    <button class="footer-scroll-top" id="scrollTop" aria-label="Scroll to top">
+        <i data-lucide="arrow-up" width="20" height="20"></i>
+    </button>
+
+    <script>
+        // Mobile nav toggle
+        const navToggle = document.getElementById('navToggle');
+        const navLinks = document.getElementById('navLinks');
+
+        navToggle.addEventListener('click', () => {
+            navLinks.classList.toggle('open');
+        });
+
+        navLinks.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                navLinks.classList.remove('open');
+            });
+        });
+
+        // Scroll-triggered fade-in
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+        // Scroll to top button visibility
+        const scrollTopBtn = document.getElementById('scrollTop');
+
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 600) {
+                scrollTopBtn.classList.add('visible');
+            } else {
+                scrollTopBtn.classList.remove('visible');
+            }
+        });
+
+        scrollTopBtn.addEventListener('click', () => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+
+        // Initialize Lucide icons
+        lucide.createIcons();
+    </script>
+</body>
+</html>
